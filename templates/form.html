@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heart Disease Assessment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Heart Disease Assessment</h1>
+            <form method="POST" action="{{ url_for('predict') }}">
+                <div class="form-group">
+                    <label for="Age">Age:</label>
+                    <input type="text" id="Age" name="Age" required>
+                </div>
+                <div class="form-group">
+                    <label for="Sex">Sex:</label>
+                    <select id="Sex" name="Sex" required>
+                        <option value="" disabled selected>Select your sex</option>
+                        <option value="0">Female</option>
+                        <option value="1">Male</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ChestPainType">Chest Pain Type:</label>
+                    <select id="ChestPainType" name="ChestPainType" required>
+                        <option value="" disabled selected>Select the type of chest pain</option>
+                        <option value="0">Typical Angina</option>
+                        <option value="1">Atypical Angina</option>
+                        <option value="2">Non-Anginal Pain</option>
+                        <option value="3">Asymptomatic</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="RestingBP">Resting Blood Pressure:</label>
+                    <input type="text" id="RestingBP" name="RestingBP" required>
+                </div>
+                <div class="form-group">
+                    <label for="Cholesterol">Cholesterol:</label>
+                    <input type="text" id="Cholesterol" name="Cholesterol" required>
+                </div>
+                <div class="form-group">
+                    <label for="FastingBS">Fasting Blood Sugar:</label>
+                    <select id="FastingBS" name="FastingBS" required>
+                        <option value="" disabled selected>Select the fasting blood sugar level</option>
+                        <option value="0">Below 120 mg/dl</option>
+                        <option value="1">Above 120 mg/dl</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="RestingECG">Resting ECG:</label>
+                    <select id="RestingECG" name="RestingECG" required>
+                        <option value="" disabled selected>Select the resting ECG result</option>
+                        <option value="0">Normal</option>
+                        <option value="1">Abnormal ST-T Wave</option>
+                        <option value="2">Left Ventricular Hypertrophy</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="MaxHR">Maximum Heart Rate:</label>
+                    <input type="text" id="MaxHR" name="MaxHR" required>
+                </div>
+                <div class="form-group">
+                    <label for="ExerciseAngina">Exercise-Induced Angina:</label>
+                    <select id="ExerciseAngina" name="ExerciseAngina" required>
+                        <option value="" disabled selected>Select the presence of exercise-induced angina</option>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Oldpeak">ST Depression Induced by Exercise:</label>
+                    <input type="text" id="Oldpeak" name="Oldpeak" required>
+                </div>
+                <div class="form-group">
+                    <label for="ST_Slope">ST Slope:</label>
+                    <select id="ST_Slope" name="ST_Slope" required>
+                        <option value="" disabled selected>Select the ST slope</option>
+                        <option value="0">Up</option>
+                        <option value="1">Flat</option>
+                        <option value="2">Down</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ModelType">Model Prediction:</label>
+                    <select id="ModelType" name="ModelType" required>
+                        <option value="" disabled selected>Select the model prediction</option>
+                        <option value="Stacked Generalization">Stacked Generalization</option>
+                        <option value="CatBoost">CatBoost</option>
+                        <option value="LGBM">LGBM</option>
+                        <option value="XGBoost">XGBoost</option>
+                        <option value="GBM">GBM</option>
+                        <option value="AdaBoost">AdaBoost</option>
+                        <option value="Extra Trees">Extra Trees</option>
+                        <option value="Random Forest">Random Forest</option>
+                        <option value="Bagging">Bagging</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+            <div class="result">
+                {% if prediction == [0] %}
+                    Result Prediction: Tidak Berpotensi Terkena Serangan Jantung
+                {% elif prediction == [1] %}
+                    Result Prediction: Berpotensi Terkena Serangan Jantung
+                {% else %}
+                    {{ prediction }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload CSV File</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-2.css') }}">
+</head>
+<body>
+    <h1>Upload CSV File</h1>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <label for="file">Select CSV file:</label>
+        <input type="file" name="file" id="file" accept=".csv" required><br><br>
+        
+        <label for="model">Select Model:</label>
+        <select name="model" id="model" required>
+            <option value="Stacked Generalization - Default">Stacked Generalization - Default</option>
+            <option value="Stacked Generalization - Tuning">Stacked Generalization - Tuning</option>
+            <option value="GBM - Default">GBM - Default</option>
+            <option value="GBM - Tuning">GBM - Tuning</option>
+            <option value="Random Forest - Default">Random Forest - Default</option>
+            <option value="Random Forest - Tuning">Random Forest - Tuning</option>
+        </select><br><br>
+
+        <input type="submit" value="Predict">
+    </form>
+</body>
+</html>

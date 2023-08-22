@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-2.css') }}">
+</head>
+<body>
+    <h1>Prediction Result</h1>
+
+    <h2>Metrics</h2>
+    <table>
+        <tr>
+            <th>Accuracy</th>
+            <th>Precision</th>
+            <th>Recall</th>
+            <th>F1 Score</th>
+        </tr>
+        <tr>
+            <td>{{ accuracy }}</td>
+            <td>{{ precision }}</td>
+            <td>{{ sensitivity }}</td>
+            <td>{{ f1 }}</td>
+        </tr>
+    </table>
+
+    <h2>Medical Record Predictions</h2>
+    <table>
+        <tr>
+            <th>Patient ID</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>ChestPainType</th>
+            <th>RestingBP</th>
+            <th>Cholesterol</th>
+            <th>FastingBS</th>
+            <th>RestingECG</th>
+            <th>MaxHR</th>
+            <th>ExerciseAngina</th>
+            <th>Oldpeak</th>
+            <th>ST_Slope</th>
+            <th>Target</th>
+            <th>Prediction</th>
+        </tr>
+        {% for index, row in result.iterrows() %}
+        {% set prediction = row['Prediction'] %}
+        {% set target = row['Target'] %}
+        {% if prediction != target %}
+            <tr class="red">
+        {% else %}
+            <tr class="green">
+        {% endif %}
+            <td>{{ index }}</td>
+            <td>{{ row['Age'] }}</td>
+            <td>{{ row['Sex'] }}</td>
+            <td>{{ row['ChestPainType'] }}</td>
+            <td>{{ row['RestingBP'] }}</td>
+            <td>{{ row['Cholesterol'] }}</td>
+            <td>{{ row['FastingBS'] }}</td>
+            <td>{{ row['RestingECG'] }}</td>
+            <td>{{ row['MaxHR'] }}</td>
+            <td>{{ row['ExerciseAngina'] }}</td>
+            <td>{{ row['Oldpeak'] }}</td>
+            <td>{{ row['ST_Slope'] }}</td>
+            <td>{{ row['Prediction'] }}</td>
+            <td>{{ row['Target'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
